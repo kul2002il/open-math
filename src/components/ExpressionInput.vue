@@ -1,5 +1,5 @@
 <template>
-    <textarea v-model="source"></textarea>
+    <textarea cols="80" rows="4" v-model="source"></textarea>
 </template>
 
 <script setup>

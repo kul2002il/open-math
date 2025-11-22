@@ -61,7 +61,7 @@ function setPriorityForOperations(arr: string[]): { operator: string; point: num
     return out;
 }
 
-interface TreeNode {
+export interface TreeNode {
     operator: string;
     left?: TreeNode;
     right?: TreeNode;
