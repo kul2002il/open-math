@@ -1,27 +1,27 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <ExpressionInput v-model="line"/>
+    <pre>{{parsed}}</pre>
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script setup lang="ts">
 
-export default defineComponent({
-    name: 'App',
-    components: {
-        HelloWorld
-    }
+import {computed, ref} from 'vue';
+
+import ExpressionInput from './components/ExpressionInput.vue';
+
+import {parseExpression} from './modules/parser';
+
+const line = ref("(x + 10.2)^2 + 5*y - z");
+const parsed = computed(() => {
+    return parseExpression(line.value);
 });
+
 </script>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+pre {
+    font-size: 15px;
+    color: white;
+    background-color: black;
 }
 </style>
