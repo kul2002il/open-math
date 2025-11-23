@@ -1,5 +1,5 @@
 <template>
-    <div class="operator">
+    <div class="brace-operator">
         <div>(</div>
         <OperatorContainer v-if="treeNode.right" :treeNode="treeNode.right" />
         <div>)</div>
@@ -19,7 +19,7 @@ defineProps<{
 </script>
 
 <style scoped>
-.operator {
+.brace-operator {
     display: flex;
     flex-direction: row;
     Justify-content:center;

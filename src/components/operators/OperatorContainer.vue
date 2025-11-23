@@ -4,16 +4,18 @@
     <InlineOperator operator="⋅" v-else-if="treeNode.operator === '*'" :treeNode="treeNode" />
     <BraceOperator v-else-if="treeNode.operator === '('" :treeNode="treeNode" />
     <DivisionOperator v-else-if="treeNode.operator === '/'" :treeNode="treeNode" />
-    <div class="operator" v-else>{{treeNode.operator || '[none]'}}</div>
+    <PowOperator v-else-if="treeNode.operator === '^'" :treeNode="treeNode" />
+    <div v-else>{{treeNode.operator || '[none]'}}</div>
 </template>
 
 <script setup lang="ts">
 
+import {TreeNode} from "@/modules/parser";
+import {defineProps} from 'vue';
 import InlineOperator from "@/components/operators/InlineOperator.vue";
 import BraceOperator from "@/components/operators/BraceOperator.vue";
 import DivisionOperator from "@/components/operators/DivisionOperator.vue";
-import {TreeNode} from "@/modules/parser";
-import {defineProps} from 'vue';
+import PowOperator from "@/components/operators/PowOperator.vue";
 
 defineProps<{
   treeNode: TreeNode;

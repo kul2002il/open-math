@@ -1,5 +1,5 @@
 <template>
-    <div class="operator">
+    <div class="line-operator">
         <OperatorContainer v-if="treeNode.left" :treeNode="treeNode.left" />
         <div>{{operator}}</div>
         <OperatorContainer v-if="treeNode.right" :treeNode="treeNode.right" />
@@ -20,7 +20,7 @@ defineProps<{
 </script>
 
 <style scoped>
-.operator {
+.line-operator {
     display: flex;
     flex-direction: row;
     Justify-content:center;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <ExpressionInput v-model="line"/>
-        <div>
+        <div class="expression-container">
             <OperatorContainer :tree-node="parsed" />
         </div>
         <pre>{{parsed}}</pre>
@@ -15,7 +15,7 @@ import ExpressionInput from '@/components/ExpressionInput.vue';
 import OperatorContainer from "@/components/operators/OperatorContainer.vue";
 import {parseExpression} from './modules/parser';
 
-const line = ref("{x + 10.2}/2 + 5*(y - z)");
+const line = ref("{x + 10.2}/2 + 5*(y - z)^{1^1^1+1}");
 const parsed = computed(() => {
     return parseExpression(line.value);
 });
@@ -23,6 +23,10 @@ const parsed = computed(() => {
 </script>
 
 <style>
+.expression-container {
+    font-size: 25px;
+}
+
 pre {
     font-size: 15px;
     color: white;
