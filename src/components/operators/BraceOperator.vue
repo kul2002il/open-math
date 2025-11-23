@@ -1,8 +1,8 @@
 <template>
     <div class="operator">
-        <OperatorContainer v-if="treeNode.left" :treeNode="treeNode.left" />
-        <div>{{operator}}</div>
+        <div>(</div>
         <OperatorContainer v-if="treeNode.right" :treeNode="treeNode.right" />
+        <div>)</div>
     </div>
 </template>
 
@@ -14,7 +14,6 @@ import {defineProps} from 'vue';
 
 defineProps<{
     treeNode: TreeNode;
-    operator: string
 }>();
 
 </script>

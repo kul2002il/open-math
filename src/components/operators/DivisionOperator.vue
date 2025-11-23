@@ -12,7 +12,7 @@ import OperatorContainer from "@/components/operators/OperatorContainer.vue";
 import type {TreeNode} from "@/modules/parser";
 import {defineProps} from 'vue';
 
-const props = defineProps<{
+defineProps<{
     treeNode: TreeNode;
 }>();
 </script>

@@ -1,4 +1,4 @@
-function splitIntoLexemes(source: string): string[] {
+export function splitIntoLexemes(source: string): string[] {
     let parsed = [source];
 
     const lexemes = [
@@ -9,6 +9,8 @@ function splitIntoLexemes(source: string): string[] {
         "^",
         "(",
         ")",
+        "{",
+        "}",
     ];
 
     for (const lexeme of lexemes) {
@@ -23,20 +25,17 @@ function splitIntoLexemes(source: string): string[] {
         }
     }
 
-    return parsed;
+    return parsed.filter(item => item !== "" && item !== " ");
 }
 
-function removeEmptyStrings(arr: string[]): string[] {
-    return arr.filter(item => item !== "" && item !== " ");
-}
-
-function setPriorityForOperations(arr: string[]): { operator: string; point: number }[] {
+export function setPriorityForOperations(arr: string[]): { operator: string; point: number }[] {
     const points: { [key: string]: number } = {
         "+": 1,
         "-": 1,
         "*": 2,
         "/": 2,
         "^": 3,
+        "(": 11,
     };
 
     const out = [];
@@ -45,8 +44,16 @@ function setPriorityForOperations(arr: string[]): { operator: string; point: num
     for (const element of arr) {
         switch (element) {
             case "(":
+                out.push({
+                    operator: element,
+                    point: (points[element] || 10) + counter * 100,
+                });
                 counter++;
                 break;
+            case "{":
+                counter++;
+                break;
+            case "}":
             case ")":
                 counter--;
                 break;
@@ -67,13 +74,13 @@ export interface TreeNode {
     right?: TreeNode;
 }
 
-function buildTree(arr: { operator: string; point: number }[]): TreeNode {
+function buildTree(arr: { operator: string; point: number }[]): TreeNode | undefined {
     if (arr.length === 0) {
-        return arr[0];
+        return undefined;
     }
 
     let indexOfLastOperation = 0;
-    let minPoint = 10000000;
+    let minPoint = arr[0].point;
 
     for (let i = 1; i < arr.length; i++) {
         if (minPoint >= arr[i].point) {
@@ -92,9 +99,7 @@ function buildTree(arr: { operator: string; point: number }[]): TreeNode {
 export function parseExpression(source: string) {
     return buildTree(
         setPriorityForOperations(
-            removeEmptyStrings(
-                splitIntoLexemes(source)
-            )
+            splitIntoLexemes(source)
         )
     );
 }
