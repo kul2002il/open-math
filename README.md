@@ -1,4 +1,7 @@
-# math-app
+# OpenMath
+
+## WebPage
+[Click](https://kul2002il.github.io/open-math/) to go to OpenMath!
 
 ## Project setup
 ```
